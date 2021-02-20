@@ -35,8 +35,7 @@ RSpec.describe 'Todos_API', type: :request do
       end
 
       it 'returns status code 200' do
-        expect(response).to
-        have_http_status(200)
+        expect(response).to have_http_status(200)
       end
     end
 
@@ -45,8 +44,7 @@ RSpec.describe 'Todos_API', type: :request do
       let(:todo_id){100}
 
       it 'returns status code 404' do
-        expect(response).to
-        have_http_status(404)
+        expect(response).to have_http_status(404)
       end
 
       it 'returns a not found message' do
@@ -68,8 +66,7 @@ RSpec.describe 'Todos_API', type: :request do
       end
 
       it 'returns status code 201' do
-        expect(response).to
-        have_http_status(201)
+        expect(response).to have_http_status(201)
       end
     end
 
@@ -77,8 +74,7 @@ RSpec.describe 'Todos_API', type: :request do
       before { post '/todos', params:{ title:'Foobar'}}
 
       it 'returns status code 422' do
-        expect(response).to
-        have_http_status(422)
+        expect(response).to have_http_status(422)
       end
 
       it 'returns a validation failure message' do
@@ -107,8 +103,7 @@ RSpec.describe 'Todos_API', type: :request do
   describe 'DELETE /todos/:id' do
     before { delete "/todos/#{todo_id}"}
       it 'returns status code 204' do
-      expect(response).to
-      have_http_status(204)
+      expect(response).to have_http_status(204)
     end
   end
 end
