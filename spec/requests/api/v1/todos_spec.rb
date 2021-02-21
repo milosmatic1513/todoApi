@@ -1,6 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'todos', type: :request do
+
   #Method : Get
   #Path   :/todos/
   #Title  :Retrieve all todos
@@ -84,7 +85,7 @@ RSpec.describe 'todos', type: :request do
   #Title  :Update a todo
 
   path '/todos/{id}' do
-    put 'Updates a todo (UPDATE)' do
+    put 'Update a todo (UPDATE)' do
       tags 'Todo'
       parameter name: :id, :in => :path, :type => :string
       consumes "application/json" , "application/xml"

@@ -4,6 +4,194 @@ info:
   title: API V1
   version: v1
 paths:
+  "/todos/{id}/items":
+    get:
+      summary: Retrieve all items ( INDEX )
+      tags:
+      - Item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  done:
+                    type: boolean
+                required:
+                - name
+                - done
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  done:
+                    type: boolean
+                required:
+                - name
+                - done
+        '404':
+          description: Todo not found
+    post:
+      summary: Create an Item ( CREATE )
+      tags:
+      - Item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Item created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                done:
+                  type: boolean
+              required:
+              - name
+              - done
+              - id
+          application/xml:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                done:
+                  type: boolean
+              required:
+              - name
+              - done
+              - id
+  "/todos/{id}/items/{todo_id}":
+    get:
+      summary: Retrieve an Item ( SHOW )
+      tags:
+      - Item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  created_by:
+                    type: string
+                required:
+                - title
+                - created_by
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  created_by:
+                    type: string
+                required:
+                - title
+                - created_by
+        '404':
+          description: Item or Todo not found
+    put:
+      summary: Update an Item ( UPDATE )
+      tags:
+      - Item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Item updated
+        '404':
+          description: Item / Todo not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                done:
+                  type: boolean
+              required:
+              - name
+              - done
+          application/xml:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                done:
+                  type: boolean
+              required:
+              - name
+              - done
+    delete:
+      summary: Deletes a todo ( DESTROY )
+      tags:
+      - Item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Todo deleted
+        '404':
+          description: Todo not found
   "/todos/":
     get:
       summary: Retrieve all todos ( INDEX )
@@ -87,7 +275,7 @@ paths:
         '404':
           description: Todo not found
     put:
-      summary: Updates a todo (UPDATE)
+      summary: Update a todo (UPDATE)
       tags:
       - Todo
       parameters:
