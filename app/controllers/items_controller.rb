@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
 
   #GET /todo/:todo_id/items/:id
   def show
-   json_response(@todo.items.find_by!(id: params[:id]))
+   json_response(@item)
   end
 
   #POST /todo/:todo_id/items/
@@ -18,12 +18,12 @@ class ItemsController < ApplicationController
     @todo.items.create! item_params
     json_response(@item,:created)
   end
+
   #PUT /todo/:todo_id/items/:id
   def update
     @item.update(item_params)
     head :no_content
   end
-
 
   #DELETE /todo/:todo_id/items/:id
   def destroy
@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
   end
 
   def set_todo_item
-    @item = @todo.items.find_by!(id: params[:id])
+    @item = @todo.items.find_by!(id: params[:id]) if @todo
   end
 
   def item_params
