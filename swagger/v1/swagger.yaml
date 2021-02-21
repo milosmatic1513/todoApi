@@ -3,7 +3,143 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  "/todos/":
+    get:
+      summary: Retrieve all todos ( INDEX )
+      tags:
+      - Todo
+      responses:
+        '200':
+          description: Todos found
+  "/todos":
+    post:
+      summary: Create a Todo ( CREATE )
+      tags:
+      - Todo
+      parameters: []
+      responses:
+        '201':
+          description: Todo created
+        '422':
+          description: Invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                created_by:
+                  type: string
+              required:
+              - title
+              - created_by
+          application/xml:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                created_by:
+                  type: string
+              required:
+              - title
+              - created_by
+  "/todos/{id}":
+    get:
+      summary: Retrieves a todo ( SHOW )
+      tags:
+      - Todo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Todo found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  created_by:
+                    type: string
+                required:
+                - title
+                - created_by
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  created_by:
+                    type: string
+                required:
+                - title
+                - created_by
+        '404':
+          description: Todo not found
+    put:
+      summary: Updates a todo (UPDATE)
+      tags:
+      - Todo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Todo updated
+        '404':
+          description: Todo not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                created_by:
+                  type: string
+              required:
+              - title
+              - created_by
+          application/xml:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                created_by:
+                  type: string
+              required:
+              - title
+              - created_by
+    delete:
+      summary: Deletes a todo ( DESTROY )
+      tags:
+      - Todo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Todo deleted
+        '404':
+          description: Todo not found
 servers:
 - url: http://{defaultHost}
   variables:
