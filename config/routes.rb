@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     resources :items
   end
   resources :sessions ,only: [:create]
+  resources :registrations ,only: [:create]
 end
