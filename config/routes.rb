@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :todos do
     resources :items
   end
+  resources :sessions ,only: [:create]
 end
