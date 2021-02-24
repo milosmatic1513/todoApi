@@ -505,7 +505,7 @@ paths:
         '200':
           description: User Logged Out
 servers:
-- url: http://{defaultHost}
+- url: https://rails-todo-api-app.herokuapp.com
   variables:
     defaultHost:
-      default: 127.0.0.1:3000
+      default: rails-todo-api-app.herokuapp.com
