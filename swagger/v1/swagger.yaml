@@ -41,6 +41,27 @@ paths:
                 required:
                 - name
                 - done
+        '403':
+          description: Forbidden Access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - name
+                - done
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - name
+                - done
         '404':
           description: Todo not found
     post:
@@ -56,6 +77,8 @@ paths:
       responses:
         '201':
           description: Item created
+        '403':
+          description: Forbidden Access
         '422':
           description: invalid request
       requestBody:
@@ -108,10 +131,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  title:
+                  name:
                     type: string
-                  created_by:
-                    type: string
+                  done:
+                    type: boolean
                 required:
                 - title
                 - created_by
@@ -119,13 +142,34 @@ paths:
               schema:
                 type: object
                 properties:
-                  title:
+                  name:
                     type: string
-                  created_by:
-                    type: string
+                  done:
+                    type: boolean
                 required:
                 - title
                 - created_by
+        '403':
+          description: Forbidden Access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - name
+                - done
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - name
+                - done
         '404':
           description: Item or Todo not found
     put:
@@ -146,6 +190,8 @@ paths:
       responses:
         '204':
           description: Item updated
+        '403':
+          description: Forbidden Access
         '404':
           description: Item / Todo not found
       requestBody:
@@ -190,6 +236,27 @@ paths:
       responses:
         '204':
           description: Todo deleted
+        '403':
+          description: Forbidden Access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - name
+                - done
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - name
+                - done
         '404':
           description: Todo not found
   "/todos/":

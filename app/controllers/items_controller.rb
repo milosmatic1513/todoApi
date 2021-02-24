@@ -8,18 +8,26 @@ class ItemsController < ApplicationController
     if @current_user
       json_response(@todo.items)
     else
-      json_message("Login To Add Items To Todos")
+      json_message("Login To Add Items To Todos",:forbidden)
     end
   end
 
   #GET /todo/:todo_id/items/:id
   def show
-   json_response(@item)
+    if @current_user
+      json_response(@item)
+    else
+      json_message("Login To Add Items To Todos",:forbidden)
+    end
   end
 
   #POST /todo/:todo_id/items/
   def create
-    json_response(@todo.items.create!(item_params),:created)
+    if @current_user
+      json_response(@todo.items.create!(item_params),:created)
+    else
+      json_message("Login To Add Items To Todos",:forbidden)
+    end
   end
 
   #PUT /todo/:todo_id/items/:id
