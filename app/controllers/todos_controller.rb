@@ -8,7 +8,7 @@ class TodosController < ApplicationController
       @todos = @current_user.todos.all
       json_response(@todos)
     else
-      json_message("Login to View todos")
+      json_message("Login to View todos",:forbidden)
     end
   end
 
@@ -18,7 +18,7 @@ class TodosController < ApplicationController
       @todo =@current_user.todos.create!(title: params["title"],created_by: @current_user.email)
       json_response(@todo , :created)
     else
-      json_message("Login to Create todos")
+      json_message("Login to Create todos",:forbidden)
     end
   end
 
@@ -27,7 +27,7 @@ class TodosController < ApplicationController
     if @current_user
       json_response(@todo)
     else
-      json_message("Login to View todos")
+      json_message("Login to View todos",:forbidden)
     end
   end
 
@@ -37,7 +37,7 @@ class TodosController < ApplicationController
       @todo.update(todo_params)
       head :no_content
     else
-      json_message("Login to Update todos")
+      json_message("Login to Update todos",:forbidden)
     end
   end
 
@@ -47,7 +47,7 @@ class TodosController < ApplicationController
       @todo.destroy
       head :no_content
     else
-      json_message("Login to Delete todos")
+      json_message("Login to Delete todos",:forbidden)
     end
   end
 
