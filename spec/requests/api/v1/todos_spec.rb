@@ -28,9 +28,8 @@ RSpec.describe 'todos', type: :request do
         type: :object,
         properties: {
           title: { type: :string },
-          created_by: { type: :string }
         },
-        required: ["title", "created_by"],
+        required: ["title"],
       }
 
       #response created
@@ -93,9 +92,9 @@ RSpec.describe 'todos', type: :request do
         type: :object,
         properties: {
           title: { type: :string },
-          created_by: { type: :string }
+
         },
-        required: ["title", "created_by"],
+        required: ["title"],
       }
 
       #response ok

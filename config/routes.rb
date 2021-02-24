@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :todos do
     resources :items
   end
-  resources :sessions ,only: [:create]
-  resources :registrations ,only: [:create]
+  #User Specific Functions
+  delete :logout , to: "sessions#logout"
+  get    :logged_in , to: "sessions#logged_in"
+  post   :login ,to: "sessions#login"
+  post   :signup,to: "registrations#create"
 end

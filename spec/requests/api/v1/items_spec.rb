@@ -143,7 +143,11 @@ RSpec.describe 'items', type: :request do
       #response ok
 
       response '204', 'Todo deleted' do
-response 404
+        let(:id) { todo.create(title: 'foo', created_by: 'bar') }
+        run_test!
+      end
+
+      #response 404
 
       response '404', 'Todo not found' do
         let(:id) { 'invalid' }
