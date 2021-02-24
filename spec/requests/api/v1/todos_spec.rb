@@ -5,13 +5,31 @@ RSpec.describe 'todos', type: :request do
   #Method : Get
   #Path   :/todos/
   #Title  :Retrieve all todos
-
   path "/todos/" do
     get 'Retrieve all todos ( INDEX )' do
       tags 'Todo'
-      produces 'application/json', 'application/xml'
+      produces 'application/json'
       response '200', 'Todos found' do
-        let(:id) { todo.create(title: 'foo', created_by: 'bar') }
+        schema type: :object,
+          properties: {
+            title: { type: :string, },
+            created_by: { type: :string },
+            user_id: { type: :string }
+          },
+          required: [ 'title', 'created_by','user_id' ]
+
+        let(:todo) { { title: "foo", created_by: "bar" } }
+        run_test!
+
+      end
+      response '403', 'Forbidden Access' do
+        schema type: :object,
+          properties: {
+            message: { type: :string, },
+
+          }
+
+        let(:todo) { { title: "foo", created_by: "bar" } }
         run_test!
       end
     end
@@ -35,7 +53,14 @@ RSpec.describe 'todos', type: :request do
       #response created
 
       response "201", "Todo created" do
-         let(:todo) { { title: "10", created_by: "1" } }
+        let(:todo) { { title: "10", created_by: "1" } }
+        run_test!
+      end
+
+      #forbidden access
+
+      response '403', 'Forbidden Access' do
+        let(:todo) { { title: "foo", created_by: "bar" } }
         run_test!
       end
 
@@ -54,7 +79,7 @@ RSpec.describe 'todos', type: :request do
   path '/todos/{id}' do
     get 'Retrieves a todo ( SHOW )' do
       tags 'Todo'
-      produces 'application/json', 'application/xml'
+      produces 'application/json'
       parameter name: :id, :in => :path, :type => :string
 
       #response ok
@@ -64,9 +89,23 @@ RSpec.describe 'todos', type: :request do
           properties: {
             title: { type: :string, },
             created_by: { type: :string },
+            user_id: { type: :string }
           },
-          required: [ 'title', 'created_by' ]
+          required: [ 'title', 'created_by','user_id' ]
         let(:id) { todo.create(title: 'foo', created_by: 'bar') }
+        run_test!
+      end
+
+      #forbidden access
+
+      response '403', 'Forbidden Access' do
+        schema type: :object,
+          properties: {
+            message: { type: :string, },
+
+          }
+
+        let(:todo) { { title: "foo", created_by: "bar" } }
         run_test!
       end
 
@@ -104,6 +143,13 @@ RSpec.describe 'todos', type: :request do
         run_test!
       end
 
+      #access forbidden
+
+      response '403', 'Forbidden Access' do
+        let(:todo) { { title: "foo", created_by: "bar" } }
+        run_test!
+      end
+
       #response 404
 
       response '404', 'Todo not found' do
@@ -127,6 +173,13 @@ RSpec.describe 'todos', type: :request do
 
       response '204', 'Todo deleted' do
         let(:id) { todo.create(title: 'foo', created_by: 'bar') }
+        run_test!
+      end
+
+      #access forbidden
+
+      response '403', 'Forbidden Access' do
+        let(:todo) { { title: "foo", created_by: "bar" } }
         run_test!
       end
 

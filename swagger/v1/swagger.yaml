@@ -200,6 +200,30 @@ paths:
       responses:
         '200':
           description: Todos found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  created_by:
+                    type: string
+                  user_id:
+                    type: string
+                required:
+                - title
+                - created_by
+                - user_id
+        '403':
+          description: Forbidden Access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   "/todos":
     post:
       summary: Create a Todo ( CREATE )
@@ -209,6 +233,8 @@ paths:
       responses:
         '201':
           description: Todo created
+        '403':
+          description: Forbidden Access
         '422':
           description: Invalid request
       requestBody:
@@ -252,20 +278,21 @@ paths:
                     type: string
                   created_by:
                     type: string
+                  user_id:
+                    type: string
                 required:
                 - title
                 - created_by
-            application/xml:
+                - user_id
+        '403':
+          description: Forbidden Access
+          content:
+            application/json:
               schema:
                 type: object
                 properties:
-                  title:
+                  message:
                     type: string
-                  created_by:
-                    type: string
-                required:
-                - title
-                - created_by
         '404':
           description: Todo not found
     put:
@@ -281,6 +308,8 @@ paths:
       responses:
         '204':
           description: Todo updated
+        '403':
+          description: Forbidden Access
         '404':
           description: Todo not found
       requestBody:
@@ -314,6 +343,8 @@ paths:
       responses:
         '204':
           description: Todo deleted
+        '403':
+          description: Forbidden Access
         '404':
           description: Todo not found
   "/signup/":
