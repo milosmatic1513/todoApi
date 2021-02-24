@@ -24,7 +24,7 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'https://rails-todo-api-app.herokuapp.com',
+          url: 'https://{defaultHost}',
           variables: {
             defaultHost: {
               default: 'rails-todo-api-app.herokuapp.com'
