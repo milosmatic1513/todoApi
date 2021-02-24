@@ -328,6 +328,94 @@ paths:
           description: Todo deleted
         '404':
           description: Todo not found
+  "/signup/":
+    post:
+      summary: Sign up user
+      tags:
+      - User
+      parameters: []
+      responses:
+        '201':
+          description: User Created
+        '422':
+          description: Invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+          application/xml:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/login/":
+    post:
+      summary: Login user
+      tags:
+      - User
+      parameters: []
+      responses:
+        '201':
+          description: User Successfuly Loged In
+        '401':
+          description: Invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+          application/xml:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/logged_in/":
+    get:
+      summary: Check If Logged In
+      tags:
+      - User
+      responses:
+        '200':
+          description: User Loged In
+        '401':
+          description: Invalid request
+  "/logout/":
+    delete:
+      summary: Log User Out
+      tags:
+      - User
+      responses:
+        '200':
+          description: User Logged Out
 servers:
 - url: http://{defaultHost}
   variables:
