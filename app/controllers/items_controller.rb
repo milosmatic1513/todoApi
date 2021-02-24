@@ -1,11 +1,15 @@
 class ItemsController < ApplicationController
-
+  before_action :set_current_user
   before_action :set_todo
   before_action :set_todo_item ,only: [:show,:update,:destroy]
 
   # GET /todos/:todo_id/items
   def index
-    json_response(@todo.items)
+    if @current_user
+      json_response(@todo.items)
+    else
+      json_message("Login To Add Items To Todos")
+    end
   end
 
   #GET /todo/:todo_id/items/:id
@@ -15,8 +19,7 @@ class ItemsController < ApplicationController
 
   #POST /todo/:todo_id/items/
   def create
-    @todo.items.create! item_params
-    json_response(@item,:created)
+    json_response(@todo.items.create!(item_params),:created)
   end
 
   #PUT /todo/:todo_id/items/:id
@@ -34,7 +37,7 @@ class ItemsController < ApplicationController
   private
   #Functions for the Responses
   def set_todo
-    @todo=Todo.find(params[:todo_id])
+    @todo=@current_user.todos.find(params[:todo_id]) if @current_user
   end
 
   def set_todo_item
