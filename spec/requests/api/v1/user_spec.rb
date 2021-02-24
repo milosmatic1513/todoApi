@@ -53,6 +53,12 @@ RSpec.describe 'todos', type: :request do
         run_test!
       end
 
+      #access forbidden
+
+      response '403', 'Forbidden Access' do
+        run_test!
+      end
+
       #response failed
       response "401", "Invalid request" do
         run_test!

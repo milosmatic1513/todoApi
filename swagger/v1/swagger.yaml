@@ -391,6 +391,8 @@ paths:
       responses:
         '201':
           description: User Successfully Loged In
+        '403':
+          description: Forbidden Access
         '401':
           description: Invalid request
       requestBody:

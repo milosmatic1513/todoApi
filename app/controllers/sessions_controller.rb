@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       },status: :created
 
     else
-      json_message("Invalid Request" , 401)
+      json_message("Username Or Password Incorect" , :forbidden)
     end
   end
 
