@@ -6,7 +6,6 @@ class RegistrationsController < ApplicationController
       json_response(user , :created)
     else
       head(:unprocessable_entity)
-
     end
   end
 
