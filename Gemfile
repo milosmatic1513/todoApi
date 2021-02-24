@@ -22,6 +22,9 @@ gem 'puma', '~> 3.7'
 gem 'bcrypt', '~> 3.1.7'
 
 
+gem 'rake'
+gem 'rspec'
+gem 'kramdown'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

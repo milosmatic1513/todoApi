@@ -85,6 +85,8 @@ GEM
       concurrent-ruby (~> 1.0)
     json-schema (2.8.1)
       addressable (>= 2.4)
+    kramdown (2.3.0)
+      rexml
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -146,6 +148,11 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rexml (3.2.4)
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
     rspec-core (3.9.3)
       rspec-support (~> 3.9.3)
     rspec-expectations (3.9.4)
@@ -190,6 +197,8 @@ GEM
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2021.1)
+      tzinfo (>= 1.0.0)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -205,11 +214,14 @@ DEPENDENCIES
   database_cleaner
   factory_bot_rails (~> 4.0)
   faker
+  kramdown
   listen (~> 3.3)
   pg
   puma (~> 3.7)
   rack-cors
   rails (~> 6.1.2, >= 6.1.2.1)
+  rake
+  rspec
   rspec-rails (~> 3.5)
   rswag
   rswag-specs
