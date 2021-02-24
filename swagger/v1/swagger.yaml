@@ -219,22 +219,16 @@ paths:
               properties:
                 title:
                   type: string
-                created_by:
-                  type: string
               required:
               - title
-              - created_by
           application/xml:
             schema:
               type: object
               properties:
                 title:
                   type: string
-                created_by:
-                  type: string
               required:
               - title
-              - created_by
   "/todos/{id}":
     get:
       summary: Retrieves a todo ( SHOW )
@@ -297,22 +291,16 @@ paths:
               properties:
                 title:
                   type: string
-                created_by:
-                  type: string
               required:
               - title
-              - created_by
           application/xml:
             schema:
               type: object
               properties:
                 title:
                   type: string
-                created_by:
-                  type: string
               required:
               - title
-              - created_by
     delete:
       summary: Deletes a todo ( DESTROY )
       tags:
@@ -371,7 +359,7 @@ paths:
       parameters: []
       responses:
         '201':
-          description: User Successfuly Loged In
+          description: User Successfully Loged In
         '401':
           description: Invalid request
       requestBody:

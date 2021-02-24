@@ -1,40 +1,65 @@
 class TodosController < ApplicationController
+  before_action :set_current_user
   before_action :set_todo, only:[:show,:update,:destroy]
 
   #Get /todos
   def index
-    @todos = Todo.all
-    json_response(@todos)
+    if @current_user
+      @todos = @current_user.todos.all
+      json_response(@todos)
+    else
+      json_message("Login to View todos")
+    end
   end
+
   #POST/todos/
   def create
-    @todo =Todo.create!(todo_params)
-    json_response(@todo , :created)
+    if @current_user
+      @todo =@current_user.todos.create!(title: params["title"],created_by: @current_user.email)
+      json_response(@todo , :created)
+    else
+      json_message("Login to Create todos")
+    end
   end
+
   #GET /todos/:id
   def show
-    json_response(@todo)
+    if @current_user
+      json_response(@todo)
+    else
+      json_message("Login to View todos")
+    end
   end
+
   #PUT /todos/:id
   def update
-    @todo.update(todo_params)
-    head :no_content
+    if @current_user
+      @todo.update(todo_params)
+      head :no_content
+    else
+      json_message("Login to Update todos")
+    end
   end
 
   #DELETE /todos/:id
   def destroy
-    @todo.destroy
-    head :no_content
+    if @current_user
+      @todo.destroy
+      head :no_content
+    else
+      json_message("Login to Delete todos")
+    end
   end
 
 
   private
 
   def set_todo
-    @todo = Todo.find(params[:id])
+    @todo = @current_user.todos.all.find(params[:id]) if @current_user
   end
 
+
   def todo_params
-    params.permit(:title,:created_by)
+    params.permit(:title)
   end
 end
