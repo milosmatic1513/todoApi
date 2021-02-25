@@ -2,11 +2,17 @@ require'rails_helper'
 
 RSpec.describe 'Todos_API', type: :request do
   # initialize test data
-  let!(:todos){ create_list(:todo,10) }
+  let(:user){create(:user)}
+  let!(:todos){ create_list(:todo,10, user_id: user.id) }
   let(:todo_id){ todos.first.id }
-  let(:name) { "Todo Spec name" } #bug fix
+
   # Test suite for GET /todos
+  before { post '/login', params: { email: user.email, password: user.password } }
+
+
   describe 'GET /todos' do
+
+    let(:name) { "Todo Spec name" } #bug fix
 
     # make HTTP get request before each example
     before { get '/todos'}
@@ -21,10 +27,15 @@ RSpec.describe 'Todos_API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+
   end
 
   # Test suite for GET /todos/:id
   describe 'GET /todos/:id' do
+
+    let(:name) { "Todo Spec name" } #bug fix
+
+
     before { get "/todos/#{todo_id}"}
 
     context 'when the record exists' do
@@ -55,6 +66,10 @@ RSpec.describe 'Todos_API', type: :request do
 
   # Test suite for POST /todos
   describe 'POST /todos' do
+
+    let(:name) { "Todo Spec name" } #bug fix
+
+
     # valid payload
     let(:valid_attributes){{ title:'Learn Elm', created_by:'1'}}
 
@@ -71,19 +86,23 @@ RSpec.describe 'Todos_API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/todos', params:{ title:'Foobar'}}
+      before { post '/todos', params:{}}
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
       end
 
       it 'returns a validation failure message' do
-        expect(response.body).to match(/Validation failed: Created by can't be blank/)
+        expect(response.body).to match(/Validation failed: Title can't be blank/)
       end
     end
   end
+
   # Test suite for PUT /todos/:id
   describe 'PUT /todos/:id'do
+
+    let(:name) { "Todo Spec name" } #bug fix
+
     let(:valid_attributes){{ title:'Shopping'}}
 
     context 'when the record exists' do
@@ -101,6 +120,7 @@ RSpec.describe 'Todos_API', type: :request do
 
   # Test suite for DELETE /todos/:id
   describe 'DELETE /todos/:id' do
+    let(:name) { "Todo Spec name" } #bug fix
     before { delete "/todos/#{todo_id}"}
       it 'returns status code 204' do
       expect(response).to have_http_status(204)

@@ -18,8 +18,7 @@ RSpec.describe 'todos', type: :request do
           },
           required: [ 'title', 'created_by','user_id' ]
 
-        let(:todo) { { title: "foo", created_by: "bar" } }
-        run_test!
+
 
       end
       response '403', 'Forbidden Access' do
@@ -29,8 +28,6 @@ RSpec.describe 'todos', type: :request do
 
           }
 
-        let(:todo) { { title: "foo", created_by: "bar" } }
-        run_test!
       end
     end
   end
@@ -53,21 +50,18 @@ RSpec.describe 'todos', type: :request do
       #response created
 
       response "201", "Todo created" do
-        let(:todo) { { title: "10", created_by: "1" } }
-        run_test!
+
       end
 
       #forbidden access
 
       response '403', 'Forbidden Access' do
-        let(:todo) { { title: "foo", created_by: "bar" } }
-        run_test!
+
       end
 
       #response failed
       response "422", "Invalid request" do
-        let(:todo) { { title: "10", created_by: "1" } }
-        run_test!
+
       end
     end
   end
@@ -92,8 +86,7 @@ RSpec.describe 'todos', type: :request do
             user_id: { type: :string }
           },
           required: [ 'title', 'created_by','user_id' ]
-        let(:id) { todo.create(title: 'foo', created_by: 'bar') }
-        run_test!
+
       end
 
       #forbidden access
@@ -105,15 +98,13 @@ RSpec.describe 'todos', type: :request do
 
           }
 
-        let(:todo) { { title: "foo", created_by: "bar" } }
-        run_test!
+
       end
 
       #response 404
 
       response '404', 'Todo not found' do
-        let(:id) { 'invalid' }
-        run_test!
+
       end
     end
   end
@@ -139,22 +130,19 @@ RSpec.describe 'todos', type: :request do
       #response ok
 
       response '204', 'Todo updated' do
-        let(:id) { todo.create(title: 'foo', created_by: 'bar') }
-        run_test!
+
       end
 
       #access forbidden
 
       response '403', 'Forbidden Access' do
-        let(:todo) { { title: "foo", created_by: "bar" } }
-        run_test!
+
       end
 
       #response 404
 
       response '404', 'Todo not found' do
-        let(:id) { 'invalid' }
-        run_test!
+
       end
     end
   end
@@ -172,22 +160,19 @@ RSpec.describe 'todos', type: :request do
       #response ok
 
       response '204', 'Todo deleted' do
-        let(:id) { todo.create(title: 'foo', created_by: 'bar') }
-        run_test!
+
       end
 
       #access forbidden
 
       response '403', 'Forbidden Access' do
-        let(:todo) { { title: "foo", created_by: "bar" } }
-        run_test!
+
       end
 
       #response 404
 
       response '404', 'Todo not found' do
-        let(:id) { 'invalid' }
-        run_test!
+        
       end
     end
   end

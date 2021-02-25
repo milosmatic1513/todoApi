@@ -21,12 +21,12 @@ RSpec.describe 'todos', type: :request do
       #response created
 
       response "201", "User Created" do
-        run_test!
+
       end
 
       #response failed
       response "422", "Invalid request" do
-        run_test!
+
       end
     end
   end
@@ -50,18 +50,18 @@ RSpec.describe 'todos', type: :request do
       #response created
 
       response "201", "User Successfully Loged In" do
-        run_test!
+
       end
 
       #access forbidden
 
       response '403', 'Forbidden Access' do
-        run_test!
+
       end
 
       #response failed
       response "401", "Invalid request" do
-        run_test!
+
       end
     end
   end
@@ -77,12 +77,12 @@ RSpec.describe 'todos', type: :request do
       #response created
 
       response "200", "User Loged In" do
-        run_test!
+
       end
 
       #response failed
       response "401", "Invalid request" do
-        run_test!
+
       end
     end
   end
@@ -97,7 +97,7 @@ RSpec.describe 'todos', type: :request do
       #response created
 
       response "200", "User Logged Out" do
-        run_test!
+        
       end
 
     end

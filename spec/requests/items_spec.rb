@@ -1,13 +1,20 @@
 require'rails_helper'
 RSpec.describe 'Items API' do
   # Initialize the test data
-  let!(:todo){create(:todo)}
+  let!(:todo){create(:todo, user_id: user.id)}
   let!(:items){create_list(:item,20, todo_id: todo.id)}
   let(:todo_id){ todo.id }
   let(:id){ items.first.id }
-  let(:name){ "Item spec name" }
-  # Test suite for GET /todos/:todo_id/items
+
+  let(:user){create(:user)}
+
+  before { post '/login', params: { email: user.email, password: user.password } }
+
+  #Test suite for GET /todos/:todo_id/items
   describe 'GET /todos/:todo_id/items' do
+
+    let(:name){ "Test suite for GET /todos/:todo_id/items" }
+
     before { get "/todos/#{todo_id}/items"}
 
     context 'when todo exists' do
@@ -33,6 +40,9 @@ RSpec.describe 'Items API' do
 
   # Test suite for GET /todos/:todo_id/items/:id
   describe 'GET /todos/:todo_id/items/:id' do
+
+    let(:name){ "GET /todos/:todo_id/items/:id" }
+
     before { get "/todos/#{todo_id}/items/#{id}"}
 
     context 'when todo item exists' do
@@ -61,6 +71,9 @@ RSpec.describe 'Items API' do
 
   # Test suite for PUT /todos/:todo_id/items
   describe 'POST /todos/:todo_id/items' do
+
+    let(:name){ "Test suite for PUT /todos/:todo_id/items" }
+
     let(:valid_attributes) { { name:'Visit Narnia', done:false } }
 
     context 'when request attributes are valid' do
@@ -86,6 +99,10 @@ RSpec.describe 'Items API' do
 
   # Test suite for PUT /todos/:todo_id/items/:id
   describe 'PUT /todos/:todo_id/items/:id' do
+
+    let(:name){ "Test suite for PUT /todos/:todo_id/items/:id" }
+
+
     let(:valid_attributes){{ name:'Mozart'}}
 
     before { put "/todos/#{todo_id}/items/#{id}", params: valid_attributes }
@@ -115,6 +132,9 @@ RSpec.describe 'Items API' do
 
   # Test suite for DELETE /todos/:id
   describe 'DELETE /todos/:id' do
+
+    let(:name){ "Test suite for DELETE /todos/:id" }
+
     before { delete "/todos/#{todo_id}/items/#{id}"}
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
