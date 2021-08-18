@@ -13,6 +13,7 @@ Simple api to create and manage todo lists
 Available calls
 
 | Endpoint | Function |
+| ------------- | ------------- |
 | POST /signup | Signup |
 | POST /auth/login | Login |
 | GET /auth/logout | Logout |
